@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.DoctorScheduleMapper">
+    <insert id="addSchedule">
+        insert into `ustb`.`doctor_schedule`(doctor_id, date, shift_time, department_id, is_available, visit_count, remarks)
+        values (5, null, null, null, null, null, null)
+    </insert>
+
+    <select id="getAll" resultType="entity.DoctorSchedule">
+        select * from doctor_schedule
+    </select>
+
+    <delete id="deleteSchedule">
+        DELETE FROM doctor_schedule WHERE doctor_id = 1
+    </delete>
+</mapper>
