@@ -1,5 +1,3 @@
-package mapper;
-
-public interface UserMapper {
+package mapper;public interface UserMapper {
     String getPassword(String username);
 }

@@ -25,8 +25,9 @@
         </environment>
     </environments>
     <mappers>
-        <mapper resource="mapper/DepartmentsMapper.xml"/>
         <mapper resource="mapper/UserMapper.xml"/>
         <mapper resource="mapper/DoctorScheduleMapper.xml"/>
+        <mapper resource="mapper/PatientAppointMapper.xml"/>
+        <mapper resource="mapper/ConsultationMapper.xml"/>
     </mappers>
 </configuration>

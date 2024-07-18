@@ -1,6 +1,7 @@
 package servlet;
 
-import service.doctorScheduleAddImpl;
+import entity.DoctorSchedule;
+import service.DoctorScheduleService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/doctorScheduleAdd")
-public class doctorScheduleAdd extends HttpServlet {
+@WebServlet("/doctorScheduleInsert")
+public class DoctorScheduleInsertServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         doGet(req, resp);
@@ -23,10 +24,16 @@ public class doctorScheduleAdd extends HttpServlet {
         String shift_time = req.getParameter("shift_time");
         String remarks = req.getParameter("remarks");
 
-        doctorScheduleAddImpl dsa = new doctorScheduleAddImpl();
-        dsa.addSchedule(doctor_id, date, shift_time, remarks);
-        req.setAttribute("list", dsa.getAll());
-        req.getRequestDispatcher("doctorSchedule.jsp").forward(req, resp);
+        DoctorSchedule doctorSchedule = new DoctorSchedule();
+        doctorSchedule.setDoctor_id(Integer.parseInt(doctor_id));
+        doctorSchedule.setDate(date);
+        doctorSchedule.setShift_time(shift_time);
+        doctorSchedule.setRemarks(remarks);
 
+        DoctorScheduleService ds = new DoctorScheduleService();
+        ds.insertAll(doctorSchedule);
+
+        req.setAttribute("list", ds.getAll());
+        req.getRequestDispatcher("doctorSchedule.jsp").forward(req, resp);
     }
 }

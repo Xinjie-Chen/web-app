@@ -24,30 +24,45 @@
 <div class="panel admin-panel">
   <div class="panel-head"><strong class="icon-reorder"> 内容列表</strong></div>
   <div class="padding border-bottom">
-    <button type="button" class="button border-yellow" onclick="window.location.href='/doctorScheduleAdd.jsp'"><span class="icon-plus-square-o"></span> 添加分类</button>
+    <button type="button" class="button border-yellow" onclick="window.location.href='/consultationAdd.jsp'"><span class="icon-plus-square-o"></span> 添加分类</button>
   </div>
   <table class="table table-hover text-center">
     <tr>
-      <th>Doctor Id</th>
-      <th>Date</th>
-      <th>Shift Time</th>
+      <th>consultation_id</th>
+      <th>patient_id</th>
+      <th>doctor_id</th>
+      <th>consultation_time</th>
+      <th>is_hospital_registered</th>
+      <th>is_hospitalized</th>
+      <th>medical_advice_case</th>
+      <th>status</th>
     </tr>
     <c:forEach items="${list}" var="user" varStatus="vs">
       <c:choose>
         <c:when test="${(vs.index+1)%2==0}">
           <tr style="background-color: #bfa">
+            <td>${user.consultation_id}</td>
+            <td>${user.patient_id}</td>
             <td>${user.doctor_id}</td>
-            <td>${user.date}</td>
-            <td>${user.shift_time}</td>
-            <td><div class="button-group"> <a class="button border-main" href="doctorScheduleSet.jsp?id=${user.doctor_id}"><span class="icon-edit"></span> 修改</a> <a class="button border-red" href="javascript:void(0)" onclick="return del(1,2)"><span class="icon-trash-o"></span> 删除</a> </div></td>
+            <td>${user.consultation_time}</td>
+            <td>${user.is_hospital_registered}</td>
+            <td>${user.is_hospitalized}</td>
+            <td>${user.medical_advice_case}</td>
+            <td><div class="button-group"> <a class="button border-main" href="/patientAppointSetHelper?id=${user.consultation_id}"><span class="icon-edit"></span> 修改</a> <a class="button border-red" href="javascript:void(0)" onclick="return del(${user.consultation_id})"><span class="icon-trash-o"></span> 删除</a> </div></td>
           </tr>
         </c:when>
         <c:otherwise>
           <tr>
+            <td>${user.consultation_id}</td>
+            <td>${user.patient_id}</td>
             <td>${user.doctor_id}</td>
-            <td>${user.date}</td>
-            <td>${user.shift_time}</td>
-            <td><div class="button-group"> <a class="button border-main" href="doctorScheduleSet.jsp"><span class="icon-edit"></span> 修改</a> <a class="button border-red" href="javascript:void(0)" onclick="return del(${user.doctor_id})"><span class="icon-trash-o"></span> 删除</a> </div></td>
+            <td>${user.consultation_time}</td>
+            <td>${user.is_hospital_registered}</td>
+            <td>${user.is_hospitalized}</td>
+            <td>${user.medical_advice_case}</td>
+            <td><div class="button-group">
+<%--              <a class="button border-main" href="/patientAppointSetHelper?id=${user.consultation_id}"><span class="icon-edit"></span> 修改</a> --%>
+              <a class="button border-red" href="javascript:void(0)" onclick="return del(${user.consultation_id})"><span class="icon-trash-o"></span> 删除</a> </div></td>
           </tr>
         </c:otherwise>
       </c:choose>
@@ -59,7 +74,7 @@
     if(confirm("您确定要删除吗?")){
         $.ajax({
             type: "POST",
-            url: "/doctorScheduleDelete",
+            url: "/consultationDelete",
             data: {id:id},
             success: function(data){
                 if(data == "ok"){

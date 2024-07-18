@@ -24,30 +24,39 @@
 <div class="panel admin-panel">
   <div class="panel-head"><strong class="icon-reorder"> 内容列表</strong></div>
   <div class="padding border-bottom">
-    <button type="button" class="button border-yellow" onclick="window.location.href='/add.jsp'"><span class="icon-plus-square-o"></span> 添加分类</button>
+<%--    <button type="button" class="button border-yellow" onclick="window.location.href='/PatientAppointAdd.jsp'"><span class="icon-plus-square-o"></span> 添加分类</button>--%>
   </div>
   <table class="table table-hover text-center">
     <tr>
-      <th>id</th>
-      <th>name</th>
-      <th>pid</th>
+      <th>appointment_id</th>
+      <th>patient_id</th>
+      <th>doctor_id</th>
+      <th>appointment_date</th>
+      <th>appointment_time</th>
+      <th>status</th>
     </tr>
     <c:forEach items="${list}" var="user" varStatus="vs">
       <c:choose>
         <c:when test="${(vs.index+1)%2==0}">
           <tr style="background-color: #bfa">
-            <td>${user.department_id}</td>
-            <td>${user.department_name}</td>
-            <td>${user.department_pid}</td>
-            <td><div class="button-group"> <a class="button border-main" href="cateedit.html"><span class="icon-edit"></span> 修改</a> <a class="button border-red" href="javascript:void(0)" onclick="return del(1,2)"><span class="icon-trash-o"></span> 删除</a> </div></td>
+            <td>${user.appointment_id}</td>
+            <td>${user.patient_id}</td>
+            <td>${user.doctor_id}</td>
+            <td>${user.appointment_date}</td>
+            <td>${user.appointment_time}</td>
+            <td>${user.status}</td>
+            <td><div class="button-group"> <a class="button border-main" href="/patientAppointSetHelper?id=${user.patient_id}"><span class="icon-edit"></span> 修改</a> <a class="button border-red" href="javascript:void(0)" onclick="return del(1,2)"><span class="icon-trash-o"></span> 删除</a> </div></td>
           </tr>
         </c:when>
         <c:otherwise>
           <tr>
-            <td>${user.department_id}</td>
-            <td>${user.department_name}</td>
-            <td>${user.department_pid}</td>
-            <td><div class="button-group"> <a class="button border-main" href="cateedit.html"><span class="icon-edit"></span> 修改</a> <a class="button border-red" href="javascript:void(0)" onclick="return del(1,2)"><span class="icon-trash-o"></span> 删除</a> </div></td>
+            <td>${user.appointment_id}</td>
+            <td>${user.patient_id}</td>
+            <td>${user.doctor_id}</td>
+            <td>${user.appointment_date}</td>
+            <td>${user.appointment_time}</td>
+            <td>${user.status}</td>
+              <td><div class="button-group"> <a class="button border-main" href="/patientAppointSetHelper?id=${user.patient_id}"><span class="icon-edit"></span> 修改</a> <a class="button border-red" href="javascript:void(0)" onclick="return del(${user.patient_id})"><span class="icon-trash-o"></span> 删除</a> </div></td>
           </tr>
         </c:otherwise>
       </c:choose>
@@ -55,9 +64,21 @@
   </table>
 </div>
 <script type="text/javascript">
-  function del(id,mid){
+  function del(id){
     if(confirm("您确定要删除吗?")){
-
+        $.ajax({
+            type: "POST",
+            url: "/doctorScheduleDelete",
+            data: {id:id},
+            success: function(data){
+                if(data == "ok"){
+                    alert("删除成功");
+                    window.location.reload();
+                }else{
+                    alert("删除失败");
+                }
+            }
+        });
     }
   }
 </script>

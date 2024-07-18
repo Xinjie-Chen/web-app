@@ -22,8 +22,22 @@
 <body>
 <div class="panel-head" id="add"><strong><span class="icon-pencil-square-o"></span>添加内容</strong></div>
 <div class="body-content">
-    <form method="post" class="form-x" action="/doctorScheduleInsert">
+    <form method="post" class="form-x" action="/consultationInsert">
         <div class="form-group">
+            <div class="label">
+                <label>Consultation Id</label>
+            </div>
+            <div class="field">
+                <input type="text" class="input w50" name="consultation_id" />
+                <div class="tips"></div>
+            </div>
+            <div class="label">
+                <label>Patient Id</label>
+            </div>
+            <div class="field">
+                <input type="text" class="input w50" name="patient_id" />
+                <div class="tips"></div>
+            </div>
             <div class="label">
                 <label>Doctor Id</label>
             </div>
@@ -32,24 +46,24 @@
                 <div class="tips"></div>
             </div>
             <div class="label">
-                <label>Date</label>
+                <label>Consultation Time</label>
             </div>
             <div class="field">
-                <input type="text" class="input w50" name="date" />
+                <input type="text" class="input w50" name="consultation_time" />
                 <div class="tips"></div>
             </div>
             <div class="label">
-                <label>shift time</label>
+                <label>Is Hospitalized</label>
             </div>
             <div class="field">
-                <input type="text" class="input w50" name="shift_time" />
+                <input type="text" class="input w50" name="is_hospitalized" />
                 <div class="tips"></div>
             </div>
             <div class="label">
-                <label>remarks</label>
+                <label>Medical Advice Case</label>
             </div>
             <div class="field">
-                <input type="text" class="input w50" name="remarks" />
+                <input type="text" class="input w50" name="medical_advice_case" />
                 <div class="tips"></div>
             </div>
                     <div class="field">

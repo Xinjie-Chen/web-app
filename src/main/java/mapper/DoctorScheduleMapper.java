@@ -1,10 +1,12 @@
 package mapper;
+
 import entity.DoctorSchedule;
 
 import java.util.List;
 
 public interface DoctorScheduleMapper {
-    void addSchedule(DoctorSchedule doctorSchedule);
     List<DoctorSchedule> getAll();
-    void deleteSchedule(DoctorSchedule doctorSchedule);
+    void deleteById(int id);
+    void insertAll(DoctorSchedule doctorSchedule);
+    void setAll(DoctorSchedule doctorSchedule);
 }
