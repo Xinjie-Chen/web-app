@@ -57,7 +57,19 @@
 <script type="text/javascript">
   function del(id){
     if(confirm("您确定要删除吗?")){
-        window.location.href="/doctorScheduleDelete?doctor_id="+id;
+        $.ajax({
+            type: "POST",
+            url: "/doctorScheduleDelete",
+            data: {doctor_id:id},
+            success: function(data){
+                if(data == "ok"){
+                    alert("删除成功");
+                    window.location.reload();
+                }else{
+                    alert("删除失败");
+                }
+            }
+        });
     }
   }
 </script>

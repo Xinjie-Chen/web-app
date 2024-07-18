@@ -1,5 +1,6 @@
 package servlet;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import entity.DoctorSchedule;
 import service.doctorScheduleAddImpl;
 
@@ -14,12 +15,20 @@ import java.util.HashMap;
 @WebServlet("/doctorScheduleDelete")
 public class doctorScheduleDelete extends HttpServlet {
     @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doGet(req, resp);
+    }
+
+    @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("call delete");
-        int doctor_id = Integer.parseInt(req.getParameter("doctor_id"));
+        String doctor_id = req.getParameter("doctor_id");
+        int doctorId = Integer.parseInt(doctor_id);
         doctorScheduleAddImpl dsa = new doctorScheduleAddImpl();
-        dsa.deleteSchedule(doctor_id);
-        req.setAttribute("list", dsa.getAll());
-        req.getRequestDispatcher("doctorSchedule.jsp").forward(req, resp);
+        try {
+            dsa.deleteSchedule(doctorId);
+            resp.getWriter().write("ok");
+        } catch (Exception e) {
+            resp.getWriter().write("error");
+        }
     }
 }

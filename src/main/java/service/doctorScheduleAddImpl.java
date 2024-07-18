@@ -29,7 +29,7 @@ public class doctorScheduleAddImpl {
         SqlSession sqlSession = MybatisUtil.getSqlSession();
         DoctorScheduleMapper mapper = sqlSession.getMapper(DoctorScheduleMapper.class);
         DoctorSchedule doctorSchedule = new DoctorSchedule();
-        doctorSchedule.setDoctor_id(doctorId);
+        doctorSchedule.setSchedule_id(doctorId);
         try {
             mapper.deleteSchedule(doctorSchedule);
         } catch (Exception e) {

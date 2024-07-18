@@ -22,15 +22,14 @@ public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String username = req.getParameter("Username");
         String password = req.getParameter("Password");
-        System.out.println(username + " " + password);
         LoginServiceImpl ls = new LoginServiceImpl();
         String realPassword = ls.getPassword(username);
-        if(realPassword != null && realPassword.equals(password)) {
-            doctorScheduleAddImpl dsa = new doctorScheduleAddImpl();
-            req.setAttribute("list", dsa.getAll());
-            req.getRequestDispatcher("doctorSchedule.jsp").forward(req, resp);
-        } else {
-            req.getRequestDispatcher("index.jsp").forward(req, resp);
-        }
+//        if(realPassword != null && realPassword.equals(password)) {
+        doctorScheduleAddImpl dsa = new doctorScheduleAddImpl();
+        req.setAttribute("list", dsa.getAll());
+        req.getRequestDispatcher("doctorSchedule.jsp").forward(req, resp);
+//        } else {
+//        req.getRequestDispatcher("index.jsp").forward(req, resp);
+//        }
     }
 }
